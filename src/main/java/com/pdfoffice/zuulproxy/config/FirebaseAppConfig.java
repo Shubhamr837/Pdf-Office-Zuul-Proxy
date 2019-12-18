@@ -11,8 +11,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 @Component
-public class FirebaseAppHolder {
-    private static FirebaseApp firebaseApp;
+public class FirebaseAppConfig {
+    private FirebaseApp firebaseApp;
 
     @Autowired
     ServiceConfig serviceConfig;

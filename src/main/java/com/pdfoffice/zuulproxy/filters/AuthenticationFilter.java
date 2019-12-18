@@ -4,7 +4,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.pdfoffice.zuulproxy.config.FirebaseAppHolder;
+import com.pdfoffice.zuulproxy.config.FirebaseAppConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -16,10 +16,10 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 public class AuthenticationFilter extends ZuulFilter {
     boolean SHOULD_FILTER = true;
    @Autowired
-    FirebaseAppHolder firebaseAppHolder;
+   FirebaseAppConfig firebaseAppConfig;
     public boolean isAuthorized(String apiKey){
         try {
-            FirebaseAuth.getInstance(firebaseAppHolder.getFirebaseApp()).verifyIdToken(apiKey);
+            FirebaseAuth.getInstance(firebaseAppConfig.getFirebaseApp()).verifyIdToken(apiKey);
         }
         catch (FirebaseAuthException f){
             return false;
@@ -37,7 +37,7 @@ public class AuthenticationFilter extends ZuulFilter {
 
     @Override
     public String filterType() {
-        return PRE_TYPE;
+        return FilterUtils.PRE_FILTER_TYPE;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class AuthenticationFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
 
-        String apiKey = request.getHeader("token");
+        String apiKey = request.getHeader(FilterUtils.AUTH_TOKEN);
 
         if ((!isAuthorized(apiKey))||apiKey==null){
             // blocks the request
