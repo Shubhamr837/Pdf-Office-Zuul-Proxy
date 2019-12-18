@@ -51,16 +51,8 @@ public class AuthenticationFilter extends ZuulFilter {
         HttpServletRequest request = ctx.getRequest();
 
         String apiKey = request.getHeader("token");
-        if(apiKey==null){
-            ctx.setSendZuulResponse(false);
 
-            // response to client
-            ctx.setResponseBody("Token not authorized");
-            ctx.getResponse().setHeader("Content-Type", "text/plain;charset=UTF-8");
-            ctx.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
-
-        }
-        if (!isAuthorized(apiKey)){
+        if ((!isAuthorized(apiKey))||apiKey==null){
             // blocks the request
             ctx.setSendZuulResponse(false);
 

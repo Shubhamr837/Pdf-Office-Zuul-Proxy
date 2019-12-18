@@ -24,6 +24,7 @@ public class FirebaseAppHolder {
                 .setCredentials(GoogleCredentials.fromStream(inputStream))
                 .setDatabaseUrl(serviceConfig.getFirebaseDatabaseUrl())
                 .build();
+     inputStream.close();
 
         firebaseApp =FirebaseApp.initializeApp(options);
 }
