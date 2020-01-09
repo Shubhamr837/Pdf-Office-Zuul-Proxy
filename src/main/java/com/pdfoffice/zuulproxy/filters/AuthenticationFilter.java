@@ -22,9 +22,11 @@ public class AuthenticationFilter extends ZuulFilter {
             FirebaseAuth.getInstance(firebaseAppConfig.getFirebaseApp()).verifyIdToken(apiKey);
         }
         catch (FirebaseAuthException f){
+
             return false;
         }
         catch(Exception e) {
+
             return false;
         }
         return true;
