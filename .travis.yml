@@ -1,6 +1,4 @@
 language: java
-jdk:
-- oraclejdk8
 cache:
   directories:
   - "$HOME/.m2"
@@ -16,12 +14,14 @@ branches:
   only:
   - master
 before_install:
-- gem install travis -v 1.8.5 --no-rdoc --no-ri
-- sudo curl -k -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
-- sudo chmod +x /usr/local/bin/ecs-cli
-- export BUILD_NAME=Zuul-Proxy
+- curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+- unzip awscli-bundle.zip
+- sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+- export AWS_ACCESS_KEY_ID=AKIASTFVKUSN5V7VHUWZ
+- export AWS_SECRET_ACCESS_KEY=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
+- export AWS_DEFAULT_REGION=us-east-2
 script:
-- sh travis_scripts/tag_build.sh
-- sh travis_scripts/build_services.sh
-- sh travis_scripts/deploy_to_docker_hub.sh
-- sh travis_scripts/deploy_to_amazon_ecs.sh
+- ./mvnw package
+- docker build -t shubhamr837 .
+- docker tag shubhamr837:latest 178621424795.dkr.ecr.us-east-2.amazonaws.com/shubhamr837:zuul-proxy
+- docker push 178621424795.dkr.ecr.us-east-2.amazonaws.com/shubhamr837:zuul-proxy
