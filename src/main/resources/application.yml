@@ -5,6 +5,10 @@ ribbon:
   connection-timeout: 30000
   eureka:
     enabled: true
+zuul:
+  ignored-services: '*'
+  routes:
+    pdftoword: /pdftoword/**
 eureka:
   instance:
     preferIpAddress: true
