@@ -1,8 +1,8 @@
 server:
   port: 80
 ribbon:
-  ReadTimeout: 60000
-  connection-timeout: 30000
+  ReadTimeout: 90000
+  connection-timeout: 50000
   eureka:
     enabled: true
 zuul:
@@ -16,4 +16,4 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://10.0.1.80/eureka/
+      defaultZone: http://EurekaService:80/eureka/
