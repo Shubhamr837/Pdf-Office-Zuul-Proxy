@@ -26,5 +26,5 @@ script:
 - ./mvnw package
 - $(aws ecr get-login --no-include-email --region us-east-2)
 - docker build -t shubhamr837 .
-- docker tag shubhamr837:latest 178621424795.dkr.ecr.us-east-2.amazonaws.com/shubhamr837:zuul-proxy
-- docker push 178621424795.dkr.ecr.us-east-2.amazonaws.com/shubhamr837:zuul-proxy
+- docker tag shubhamr837:latest zuul-proxy
+- docker push shubhamr837/pdf:zuulproxy
