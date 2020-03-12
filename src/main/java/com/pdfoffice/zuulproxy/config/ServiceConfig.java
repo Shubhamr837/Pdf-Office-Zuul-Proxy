@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ServiceConfig {
-    @Value("${firebase.databseurl}")
+
     private String firebaseDatabaseUrl;
 
     public String getFirebaseDatabaseUrl() {
