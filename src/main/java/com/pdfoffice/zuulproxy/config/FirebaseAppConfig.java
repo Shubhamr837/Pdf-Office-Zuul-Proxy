@@ -18,7 +18,7 @@ public class FirebaseAppConfig {
     ServiceConfig serviceConfig;
     @PostConstruct
     public void init() throws IOException {
-        FileInputStream inputStream = new FileInputStream("pdf-office-c3d21-firebase-adminsdk-q4jhe-5db60cf07d.json") ;
+        FileInputStream inputStream = new FileInputStream("firebase_secrets.json") ;
 
      FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(inputStream))
