@@ -4,8 +4,11 @@ kubernetes files can be found in k8s folder .
 
 
 Prior knowledge of following are needed to run the application .
+
 1 . kubernetes 
+
 2 . GCP or aws 
+
 3 . continou integration 
 
 
